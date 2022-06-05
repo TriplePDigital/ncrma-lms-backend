@@ -13,7 +13,7 @@ export default {
 			name: "quiz",
 			title: "Quiz",
 			type: "reference",
-			to: { type: "quiz" },
+			to: { type: "checkpoint" },
 		},
 		{
 			name: "score",

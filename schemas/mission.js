@@ -5,7 +5,7 @@ export default {
 	fields: [
 		{
 			name: "title",
-			title: "Mission Title",
+			title: "Course Title",
 			type: "string",
 			validation: (Rule) => Rule.required().min(2).max(70),
 		},
@@ -21,7 +21,7 @@ export default {
 		},
 		{
 			name: "blurb",
-			title: "Mission Blurb",
+			title: "Course Blurb",
 			description: "One liner about the course",
 			type: "string",
 			validation: (Rule) => Rule.required().max(150),
@@ -57,26 +57,22 @@ export default {
 			],
 		},
 		{
-			name: "stages",
-			title: "Stages",
-			type: "array",
-			of: [
-				{
-					type: "reference",
-					to: { type: "stage" },
-				},
-			],
+			name: "colorCode",
+			title: "Color Code of the Course",
+			description:
+				"The hexadecimal value of the color assigned to the course (including the # mark at the beginning).",
+			type: "string",
+			placeholder: "#000000",
+			validation: (Rule) => Rule.required().length(7),
 		},
 		{
-			name: "enrollment",
-			title: "Enrolled student(s)",
+			title: "Categories",
+			name: "categories",
 			type: "array",
-			of: [
-				{
-					type: "reference",
-					to: { type: "user" },
-				},
-			],
+			of: [{ type: "string" }],
+			options: {
+				layout: "tags",
+			},
 		},
 	],
 };

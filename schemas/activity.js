@@ -10,22 +10,10 @@ export default {
 			to: [{ type: "user" }],
 		},
 		{
-			name: "mission",
+			name: "content",
 			type: "reference",
-			description: "The mission that was completed or worked on",
-			to: [{ type: "mission" }],
-		},
-		{
-			name: "stage",
-			type: "reference",
-			description: "The stage that was completed or worked on",
-			to: [{ type: "stage" }],
-		},
-		{
-			name: "checkpoint",
-			type: "reference",
-			description: "The checkpoint that was completed or worked on",
-			to: [{ type: "checkpoint" }],
+			description: "The content that was completed or worked on",
+			to: [{ type: "mission" }, { type: "stage" }, { type: "checkpoint" }],
 		},
 		{
 			name: "progress",
@@ -33,4 +21,17 @@ export default {
 			description: "The progress made on the checkpoint",
 		}
 	],
+	preview: {
+		select: {
+			title: "user.firstName",
+			subtitle: "user.lastName",
+			content: "content.title",
+			progress: "progress",
+		},
+		prepare({ title, subtitle, content, progress }) {
+			return {
+				title: `${progress} completed ${content} by ${title} ${subtitle}`,
+			};
+		},
+	},
 };

@@ -6,36 +6,12 @@ export default {
 	type: "document",
 	fields: [
 		{
-			name: "title",
-			title: "Title",
-			type: "string",
-		},
-		{
-			name: "slug",
-			title: "Slug",
-			type: "slug",
-			options: {
-				source: "title",
-				maxLength: 96,
-			},
-		},
-		{
 			name: "body",
 			title: "Body",
 			type: "markdown",
 			options: {
 				minRows: 20,
 			},
-		},
-		{
-			name: "course",
-			title: "Course",
-			type: "reference",
-			to: [
-				{
-					type: "mission",
-				},
-			],
 		},
 		{
 			name: "vimeoVideo",
@@ -57,7 +33,7 @@ export default {
 			name: "duration",
 			title: "Estimate duration in minutes",
 			type: "number",
-			validation: (num) => num.min(0),
+			validation: (num) => num.required().min(0),
 		},
 	],
 
@@ -82,12 +58,11 @@ export default {
 	// },
 	preview: {
 		select: {
-			title: "title",
 			media: "vimeoVideo",
 		},
 		prepare({ title, media }) {
 			return {
-				title,
+				title: media.oEmbedData.title,
 				media: <img src={`${media.oEmbedData.thumbnail_url}`} />,
 			};
 		},

@@ -1,4 +1,28 @@
-import React from "react";
+import client from "part:@sanity/base/client";
+
+const isUniqueUser = async (email, context) => {
+	const { document } = context;
+
+	const id = document._id.replace(/^drafts\./, "");
+	const params = {
+		email,
+		published: id,
+		draft: `drafts.${id}`,
+	};
+
+	/* groq */
+	const query = `!defined(*[
+    	_type == 'user' &&
+		!(_id in [$draft, $published]) &&
+    	email == $email
+  	][0])`;
+
+	const res = await client.fetch(query, params);
+
+	console.log(res);
+
+	return res;
+};
 
 export default {
 	name: "user",
@@ -7,8 +31,27 @@ export default {
 	fields: [
 		{
 			name: "account_id",
-			title: "Account ID",
+			title: "Database Account ID",
 			type: "string",
+			readOnly: ({ currentUser }) => {
+				return !currentUser.roles.find(({ name }) => name === "administrator");
+			},
+		},
+		{
+			name: "role",
+			title: "Role and Permission",
+			type: "string",
+			readOnly: ({ currentUser }) => {
+				return !currentUser.roles.find(({ name }) => name === "administrator");
+			},
+			options: {
+				list: [
+					{ title: "Administrator", value: "admin" },
+					{ title: "Risk Manager", value: "riskManager" },
+					{ title: "Student", value: "student" },
+				],
+				layout: "dropdown",
+			},
 		},
 		{
 			name: "firstName",
@@ -24,6 +67,13 @@ export default {
 			name: "email",
 			title: "Email",
 			type: "string",
+			required: true,
+			validation: (Rule) =>
+				Rule.custom(async (value, context) => {
+					const isUnique = await isUniqueUser(value, context);
+					if (!isUnique) return "User need a unique email address";
+					return true;
+				}),
 		},
 		{
 			name: "image",
@@ -53,10 +103,17 @@ export default {
 			hidden: true,
 		},
 		{
-			name: "plan",
-			title: "Plan",
-			type: "reference",
-			to: { type: "plan" },
+			name: "enrollment",
+			title: "Enrollment",
+			type: "array",
+			of: [
+				{ name: "enrollment", type: "reference", to: { type: "enrollment" } },
+			],
+		},
+		{
+			name: "membership",
+			title: "Membership",
+			type: "string",
 		},
 		{
 			name: "achievements",

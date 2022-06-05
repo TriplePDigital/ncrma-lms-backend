@@ -25,7 +25,12 @@ export default {
 			title: "Minimum Score to Pass",
 			type: "number",
 			validation: (num) => num.min(0),
-
+		},
+		{
+			name: "stage",
+			title: "Stage",
+			type: "reference",
+			to: { type: "stage" },
 		},
 	],
 };

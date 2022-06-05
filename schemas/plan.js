@@ -12,22 +12,16 @@ export default {
 			to: { type: "user" },
 		},
 		{
-			name: "missions",
-			title: "Missions",
+			name: "activities",
+			title: "Activities",
 			type: "array",
-			of: [{ type: "reference", to: { type: "mission" } }],
+			of: [{ type: "reference", to: { type: "activity" } }],
 		},
 		{
 			name: "quizAttempts",
 			title: "Quiz Attempts",
 			type: "array",
 			of: [{ type: "reference", to: { type: "quizAttempt" } }],
-		},
-		{
-			name: "progress",
-			title: "User Progress",
-			type: "reference",
-			to: { type: "progress" },
 		},
 	],
 	preview: {

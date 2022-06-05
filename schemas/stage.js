@@ -20,21 +20,23 @@ export default {
 			},
 		},
 		{
-			name: "duration",
-			title: "Estimate duration in minutes",
+			name: "order",
+			title: "Numeric Place in course",
 			type: "number",
-			validation: (num) => num.min(0),
+			validation: (Rule) => Rule.required(),
 		},
+		// {
+		// 	name: "preview",
+		// 	title: "Preview",
+		// 	type: "boolean",
+		// 	initialValue: false,
+		// 	validation: (Rule) => Rule.required(),
+		// },
 		{
-			name: "checkpoints",
-			title: "Checkpoints",
-			type: "array",
-			of: [
-				{
-					type: "reference",
-					to: [{ type: "checkpoint" }],
-				},
-			],
+			name: "mission",
+			title: "Mission",
+			type: "reference",
+			to: { type: "mission" },
 		},
 	],
 };
