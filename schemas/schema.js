@@ -39,12 +39,9 @@ export default createSchema({
 		user,
 		webinar,
 		track,
-		plan,
 		quiz,
 		quizAttempt,
 		progress,
-		activity,
-		content,
 		enrollment,
 	]),
 });

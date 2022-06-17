@@ -39,4 +39,11 @@ export default {
 			to: { type: "mission" },
 		},
 	],
+	orderings: [
+		{
+			title: "Order in Course",
+			name: "orderInCourse",
+			by: [{ field: "order", direction: "asc" }],
+		},
+	],
 };

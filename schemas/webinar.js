@@ -24,16 +24,16 @@ export default {
 				timeStep: 15,
 				calendarTodayLabel: "Today",
 			},
-			validation: (Rule) => Rule.custom((value) => {
-				if (value) {
-					const now = new Date();
-					const startingAt = new Date(value);
-					if (startingAt < now) {
-						return "Starting at must be in the future";
-					}
-				}
-				return true;
-			}),
+			// validation: (Rule) => Rule.custom((value) => {
+			// 	if (value) {
+			// 		const now = new Date();
+			// 		const startingAt = new Date(value);
+			// 		if (startingAt < now) {
+			// 			return "Starting at must be in the future";
+			// 		}
+			// 	}
+			// 	return true;
+			// }),
 		},
 		{
 			name: "endingAt",
@@ -46,34 +46,34 @@ export default {
 				timeStep: 15,
 				calendarTodayLabel: "Today",
 			},
-			validation: (Rule) => Rule.custom((value) => {
-				if (value) {
-					const now = new Date();
-					const endingAt = new Date(value);
-					if (endingAt < now) {
-						return "Ending at must be in the future";
-					}
-				}
-				return true;
-			}),
+			// validation: (Rule) => Rule.custom((value) => {
+			// 	if (value) {
+			// 		const now = new Date();
+			// 		const endingAt = new Date(value);
+			// 		if (endingAt < now) {
+			// 			return "Ending at must be in the future";
+			// 		}
+			// 	}
+			// 	return true;
+			// }),
 		},
 		{
 			name: "purchaseLink",
 			title: "Purchase Link",
 			type: "url",
-			required: true
+			required: true,
 		},
 		{
 			name: "joinLink",
 			title: "Join Link",
 			type: "url",
-			required: true
+			required: true,
 		},
 		{
 			name: "downloadLink",
 			title: "Download Link",
 			type: "url",
-			required: true
+			required: true,
 		},
 		{
 			name: "presenters",
@@ -124,23 +124,19 @@ export default {
 					},
 				},
 			],
-		}
+		},
 	],
 	orderings: [
 		{
-			title: 'Starting At Date, New',
-			name: 'releaseDateDesc',
-			by: [
-				{field: 'startingAt', direction: 'desc'}
-			]
+			title: "Starting At Date, New",
+			name: "releaseDateDesc",
+			by: [{ field: "startingAt", direction: "desc" }],
 		},
 		{
-			title: 'Starting At Date, Old',
-			name: 'releaseDateAsc',
-			by: [
-				{field: 'startingAt', direction: 'asc'}
-			]
-		}
+			title: "Starting At Date, Old",
+			name: "releaseDateAsc",
+			by: [{ field: "startingAt", direction: "asc" }],
+		},
 	],
 	preview: {
 		select: {

@@ -4,40 +4,50 @@ export default () =>
 	S.list()
 		.title("Content")
 		.items([
-			// Make a new list item
 			S.listItem()
-				// Give it a title
 				.title("Academy")
 				.child(
-					// Make a list in the second pane called Portfolio
 					S.list()
 						.title("Course Groups")
 						.items([
-							// Add the first list item
 							S.listItem()
 								.title("Course Tracks")
 								.child(S.documentTypeList("track").title("Course Tracks")),
-							// Add a second list item
 							S.listItem()
 								.title("Courses")
+								.child(S.documentTypeList("mission").title("Courses")),
+							S.listItem()
+								.title("Course Contents")
 								.child(
 									S.documentTypeList("mission")
 										.title("Courses")
-										.child((missionId) =>
-											S.documentList()
-												.title("Videos in Course")
-												.filter('_type == "video" && course._ref == $missionId')
-												.params({ missionId })
+										.child((stageID) =>
+											S.documentTypeList("stage")
+												.title("Stages")
+												.filter('_type == "stage" && references($stageID)')
+												.params({ stageID })
+												.child((checkpointID) =>
+													S.documentTypeList("checkpoint")
+														.title("Videos")
+														.filter(
+															'_type == "checkpoint" && references($checkpointID)'
+														)
+														.params({ checkpointID })
+												)
 										)
 								),
-							// Need to group chapters based on missions
 							S.listItem()
-								.title("Chapters")
-								.child(S.documentTypeList("stage").title("All Chapters")),
-							// Need to group quizzes based on missions
-							S.listItem()
-								.title("Quizzes")
-								.child(S.documentTypeList("checkpoint").title("All Quizzes")),
+								.title("Course Chapters")
+								.child(
+									S.documentTypeList("mission")
+										.title("Courses")
+										.child((stageID) =>
+											S.documentTypeList("stage")
+												.title("Stages")
+												.filter('_type == "stage" && references($stageID)')
+												.params({ stageID })
+										)
+								),
 						])
 				),
 			S.listItem()
@@ -63,22 +73,47 @@ export default () =>
 												.params({ instructorId })
 										)
 								),
+							S.listItem()
+								.title("Course by Instructor")
+								.child(
+									S.documentTypeList("instructor")
+										.title("Instructors")
+										.child((instructorId) =>
+											S.documentTypeList("video")
+												.title("Courses taught by instructor")
+												.filter(
+													'_type == "mission" && references($instructorId)'
+												)
+												.params({ instructorId })
+										)
+								),
 						])
 				),
 			S.listItem()
 				.title("Students")
 				.child(S.documentTypeList("user").title("Students")),
 			S.listItem()
-				.title("Webinars")
-				.child(S.documentTypeList("webinar").title("Webinars")),
+				.title("Quiz and Questions")
+				.child(
+					S.documentTypeList("quiz")
+						.title("Quiz")
+						.child(
+							(quizID) =>
+								S.documentTypeList("question").title("Questions by Quiz")
+							// .filter('_type == "question" && references($quizID)')
+							// .params({ quizID })
+						)
+				),
 			S.divider(),
-			...S.documentTypeListItems().filter(
-				(item) =>
-					item.getSchemaType() !== "users" ||
-					item.getSchemaType() !== "webinars" ||
-					item.getSchemaType() !== "certifications" ||
-					item.getId() !== "certifications" ||
-					item.getTitle() !== "Certifications"
-			),
+			...S.documentTypeListItems().filter((item) => {
+				const { name } = item.getSchemaType();
+				console.log(name);
+				return (
+					name === "certification" ||
+					name === "quizAttempt" ||
+					name === "progress" ||
+					name === "webinar"
+				);
+			}),
 		])
 		.showIcons(true);
