@@ -112,7 +112,8 @@ export default () =>
 					name === "certification" ||
 					name === "quizAttempt" ||
 					name === "progress" ||
-					name === "webinar"
+					name === "webinar" ||
+					name === "quiz"
 				);
 			}),
 		])

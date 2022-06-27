@@ -46,4 +46,16 @@ export default {
 			by: [{ field: "order", direction: "asc" }],
 		},
 	],
+	preview: {
+		select: {
+			title: "title",
+			subtitle: "mission.title",
+		},
+		prepare({ title, subtitle }) {
+			return {
+				title,
+				subtitle,
+			};
+		},
+	},
 };
