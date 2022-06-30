@@ -20,6 +20,7 @@ export default {
 		select: {
 			title: "student.firstName",
 			subtitle: "course.title",
+			media: "student.avatar",
 		},
 	},
 };

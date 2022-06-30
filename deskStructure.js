@@ -24,6 +24,7 @@ export default () =>
 										.child((stageID) =>
 											S.documentTypeList("stage")
 												.title("Stages")
+												.defaultOrdering([{ field: "order", direction: "asc" }])
 												.filter('_type == "stage" && references($stageID)')
 												.params({ stageID })
 												.child((checkpointID) =>
@@ -33,6 +34,10 @@ export default () =>
 															'_type == "checkpoint" && references($checkpointID)'
 														)
 														.params({ checkpointID })
+														.defaultOrdering([
+															{ field: "order", direction: "desc" },
+															{ field: "_createdAt", direction: "desc" },
+														])
 												)
 										)
 								),
@@ -44,6 +49,7 @@ export default () =>
 										.child((stageID) =>
 											S.documentTypeList("stage")
 												.title("Stages")
+												.defaultOrdering([{ field: "order", direction: "asc" }])
 												.filter('_type == "stage" && references($stageID)')
 												.params({ stageID })
 										)
@@ -93,16 +99,22 @@ export default () =>
 				.title("Students")
 				.child(S.documentTypeList("user").title("Students")),
 			S.listItem()
-				.title("Quiz and Questions")
+				.title("Quizzes by Course")
 				.child(
-					S.documentTypeList("quiz")
-						.title("Quiz")
-						.child(
-							(quizID) =>
-								S.documentTypeList("question").title("Questions by Quiz")
-							// .filter('_type == "question" && references($quizID)')
-							// .params({ quizID })
+					S.documentTypeList("mission")
+						.title("Courses")
+						.child((missionId) =>
+							S.documentTypeList("quiz")
+								.title("Quiz")
+								.filter('_type == "quiz" && references($missionId)')
+								.params({ missionId })
 						)
+					// .child(
+					// 	(quizID) =>
+					// 		S.documentTypeList("question").title("Questions by Quiz")
+					// 	// .filter('_type == "quiz" && _id == $quizID')
+					// 	// .params({ quizID })
+					// )
 				),
 			S.divider(),
 			...S.documentTypeListItems().filter((item) => {

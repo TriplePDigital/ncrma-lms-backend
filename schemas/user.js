@@ -71,7 +71,7 @@ export default {
 			validation: (Rule) =>
 				Rule.custom(async (value, context) => {
 					const isUnique = await isUniqueUser(value, context);
-					if (!isUnique) return "User need a unique email address";
+					if (!isUnique) return "User needs a unique email address";
 					return true;
 				}),
 		},
@@ -79,6 +79,7 @@ export default {
 			name: "image",
 			title: "Image",
 			type: "url",
+			hidden: true,
 		},
 		{
 			name: "avatar",
@@ -112,12 +113,24 @@ export default {
 		},
 		{
 			name: "membership",
-			title: "Membership",
+			title: "Membership Tier",
 			type: "string",
+			options: {
+				list: [
+					{ title: "Individual", value: "individual" },
+					{ title: "COE Company", value: "coeCompany" },
+					{ title: "Company", value: "company" },
+					{ title: "Captive", value: "captive" },
+					{ title: "Service Partner", value: "servicePartner" },
+					{ title: "Continuing Educator", value: "continuingEducator" },
+					{ title: "Appointed Broker", value: "appointedBroker" },
+				],
+				layout: "dropdown",
+			},
 		},
 		{
 			name: "achievements",
-			title: "Achievements",
+			title: "Completed Certificates",
 			type: "array",
 			of: [
 				{

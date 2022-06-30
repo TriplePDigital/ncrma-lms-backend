@@ -23,6 +23,7 @@ export default {
 			name: "instructor",
 			title: "Instructor",
 			type: "reference",
+			required: true,
 			to: [
 				{
 					type: "instructor",

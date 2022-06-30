@@ -33,4 +33,16 @@ export default {
 			to: { type: "stage" },
 		},
 	],
+	preview: {
+		select: {
+			title: "title",
+			subtitle: "stage.title",
+		},
+		prepare({ title, subtitle }) {
+			return {
+				title,
+				subtitle,
+			};
+		},
+	},
 };

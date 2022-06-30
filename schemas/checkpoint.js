@@ -37,6 +37,7 @@ export default {
 			name: "instance",
 			title: "Instance",
 			type: "string",
+			initialValue: "video",
 			options: {
 				list: [
 					{ title: "Video", value: "video" },
@@ -50,6 +51,13 @@ export default {
 			type: "reference",
 			to: [{ type: "quiz" }, { type: "video" }],
 			validation: (Rule) => Rule.required(),
+		},
+	],
+	orderings: [
+		{
+			title: "By Course Structure",
+			name: "courseStructure",
+			by: [{ field: "order", direction: "asc", default: true }],
 		},
 	],
 };

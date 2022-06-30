@@ -79,9 +79,7 @@ export default {
 			name: "presenters",
 			title: "Presenters",
 			type: "array",
-			of: [
-				{ name: "presenter", type: "reference", to: { type: "instructor" } },
-			],
+			of: [{ type: "reference", to: { type: "instructor" } }],
 		},
 		{
 			name: "agenda",
