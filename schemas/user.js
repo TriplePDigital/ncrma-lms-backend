@@ -88,6 +88,13 @@ export default {
 			options: {
 				hotspot: true,
 			},
+			initialValue: {
+				// url: "https://images.unsplash.com/photo-1530268729831-4b0b9e170218?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+				asset: {
+					_ref: "image-4cbc016db58978f0d4f4623f43c495a40c78a1aa-5760x3840-jpg",
+					_type: "reference",
+				},
+			},
 			validation: (Rule) => Rule.required(),
 		},
 		{
