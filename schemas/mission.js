@@ -66,6 +66,14 @@ export default {
 			validation: (Rule) => Rule.required().length(7),
 		},
 		{
+			name: "fallbackURL",
+			title: "Fallback URL",
+			type: "url",
+			hidden: ({ currentUser }) => {
+				return !currentUser.roles.find(({ name }) => name === "administrator");
+			},
+		},
+		{
 			title: "Categories",
 			name: "categories",
 			type: "array",

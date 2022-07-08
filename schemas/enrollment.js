@@ -19,8 +19,16 @@ export default {
 	preview: {
 		select: {
 			title: "student.firstName",
-			subtitle: "course.title",
+			subtitle: "student.lastName",
 			media: "student.avatar",
+			email: "course.title",
+		},
+		prepare({ title, subtitle, media, email }) {
+			return {
+				title: `${title} ${subtitle}`,
+				subtitle: email,
+				media,
+			};
 		},
 	},
 };

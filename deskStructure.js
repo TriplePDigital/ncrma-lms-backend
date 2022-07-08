@@ -99,6 +99,18 @@ export default () =>
 				.title("Students")
 				.child(S.documentTypeList("user").title("Students")),
 			S.listItem()
+				.title("Enrollments by User")
+				.child(
+					S.documentTypeList("user")
+						.title("Users")
+						.child((userID) =>
+							S.documentTypeList("enrollment")
+								.title("Enrollments for User")
+								.filter('_type == "enrollment" && references($userID)')
+								.params({ userID })
+						)
+				),
+			S.listItem()
 				.title("Quizzes by Course")
 				.child(
 					S.documentTypeList("mission")
@@ -125,7 +137,8 @@ export default () =>
 					name === "quizAttempt" ||
 					name === "progress" ||
 					name === "webinar" ||
-					name === "quiz"
+					name === "quiz" ||
+					name === "enrollment"
 				);
 			}),
 		])
