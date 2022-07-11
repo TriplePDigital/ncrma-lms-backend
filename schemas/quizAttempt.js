@@ -23,11 +23,14 @@ export default {
 	],
 	preview: {
 		select: {
+			firstName: "user.firstName",
+			lastName: "user.lastName",
 			_createdAt: "_createdAt",
 		},
 		prepare(selection) {
 			return {
-				title: selection._createdAt,
+				title: `${selection.firstName} ${selection.lastName}`,
+				subtitle: selection._createdAt,
 			};
 		},
 	},
