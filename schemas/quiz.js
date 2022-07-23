@@ -3,12 +3,12 @@ export default {
 	title: "Quiz",
 	type: "document",
 	fields: [
-		{
-			name: "attempts",
-			title: "Quiz Attempts",
-			type: "array",
-			of: [{ type: "reference", to: { type: "quizAttempt" } }],
-		},
+		// {
+		// 	name: "attempts",
+		// 	title: "Quiz Attempts",
+		// 	type: "array",
+		// 	of: [{ type: "reference", to: { type: "quizAttempt" } }],
+		// },
 		{
 			name: "questions",
 			title: "Questions",

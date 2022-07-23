@@ -23,13 +23,13 @@ export default {
 			name: "blurb",
 			title: "Course Blurb",
 			description: "One liner about the course",
-			type: "string",
+			type: "text",
 			validation: (Rule) => Rule.required().max(150),
 		},
 		{
 			name: "description",
 			title: "Description",
-			type: "text",
+			type: "markdown",
 			validation: (Rule) => Rule.required(),
 			options: {
 				minRows: 15,

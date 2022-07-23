@@ -1,4 +1,5 @@
 import S from "@sanity/desk-tool/structure-builder";
+import { createSuperPane } from "sanity-super-pane";
 
 export default () =>
 	S.list()
@@ -129,15 +130,22 @@ export default () =>
 					// )
 				),
 			S.divider(),
+			S.listItem()
+				.title("Bulk Action Questions")
+				.child(createSuperPane("question", S)),
+			S.listItem()
+				.title("Bulk Action Quizzes")
+				.child(createSuperPane("quiz", S)),
+			S.divider(),
 			...S.documentTypeListItems().filter((item) => {
 				const { name } = item.getSchemaType();
-				console.log(name);
 				return (
 					name === "certification" ||
 					name === "quizAttempt" ||
 					name === "progress" ||
 					name === "webinar" ||
 					name === "quiz" ||
+					name === "question" ||
 					name === "enrollment"
 				);
 			}),

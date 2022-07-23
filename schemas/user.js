@@ -139,6 +139,7 @@ export default {
 			name: "achievements",
 			title: "Completed Certificates",
 			type: "array",
+			default: [],
 			of: [
 				{
 					name: "certification",

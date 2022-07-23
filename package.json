@@ -30,6 +30,7 @@
 		"sanity-plugin-goth-vimeo-input": "^1.0.3",
 		"sanity-plugin-markdown": "^2.1.0",
 		"sanity-plugin-mux-input": "^1.1.0",
+		"sanity-super-pane": "^1.0.0-alpha.11",
 		"styled-components": "^5.2.0"
 	},
 	"devDependencies": {
