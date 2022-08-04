@@ -110,14 +110,6 @@ export default {
 			type: "string",
 			hidden: true,
 		},
-		// {
-		// 	name: "enrollment",
-		// 	title: "Enrollment",
-		// 	type: "array",
-		// 	of: [
-		// 		{ name: "enrollment", type: "reference", to: { type: "enrollment" } },
-		// 	],
-		// },
 		{
 			name: "membership",
 			title: "Membership Tier",
