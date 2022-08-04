@@ -146,7 +146,8 @@ export default () =>
 					name === "webinar" ||
 					name === "quiz" ||
 					name === "question" ||
-					name === "enrollment"
+					name === "enrollment" ||
+					name === "riskManagerProfile"
 				);
 			}),
 		])
