@@ -23,6 +23,7 @@ import progress from "./progress";
 import activity from "./activity";
 import content from "./content";
 import enrollment from "./enrollment";
+import riskManagerProfile from "./riskManagerProfile";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -43,5 +44,6 @@ export default createSchema({
 		quizAttempt,
 		progress,
 		enrollment,
+		riskManagerProfile,
 	]),
 });
