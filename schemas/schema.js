@@ -16,14 +16,12 @@ import instructor from "./instructor";
 import user from "./user";
 import webinar from "./webinar";
 import track from "./track";
-import plan from "./plan";
 import quizAttempt from "./quizAttempt";
 import quiz from "./quiz";
 import progress from "./progress";
-import activity from "./activity";
-import content from "./content";
 import enrollment from "./enrollment";
 import riskManagerProfile from "./riskManagerProfile";
+import company from "./company";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -45,5 +43,6 @@ export default createSchema({
 		progress,
 		enrollment,
 		riskManagerProfile,
+		company,
 	]),
 });

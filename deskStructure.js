@@ -136,6 +136,9 @@ export default () =>
 			S.listItem()
 				.title("Bulk Action Quizzes")
 				.child(createSuperPane("quiz", S)),
+			S.listItem()
+				.title("Bulk Action Quiz Attempts")
+				.child(createSuperPane("quizAttempt", S)),
 			S.divider(),
 			...S.documentTypeListItems().filter((item) => {
 				const { name } = item.getSchemaType();
@@ -147,7 +150,9 @@ export default () =>
 					name === "quiz" ||
 					name === "question" ||
 					name === "enrollment" ||
-					name === "riskManagerProfile"
+					name === "riskManagerProfile" ||
+					name === "facility" ||
+					name === "company"
 				);
 			}),
 		])
