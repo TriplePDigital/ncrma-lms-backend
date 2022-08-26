@@ -85,36 +85,6 @@ export default {
 						},
 					],
 				},
-				{
-					name: "videoNumberThree",
-					title: "Video 3",
-					type: "object",
-					fields: [
-						{
-							name: "updatedAt",
-							title: "Updated at",
-							type: "datetime",
-							hidden: true,
-							options: {
-								dateFormat: "DD/MM/YYYY",
-								timeFormat: "HH:mm",
-							},
-						},
-						{
-							name: "status",
-							title: "Status",
-							type: "string",
-							options: {
-								list: [
-									{ title: "Started Training", value: "started" },
-									{ title: "In Training", value: "inTraining" },
-									{ title: "Can Identify most Risks", value: "idRisk" },
-									{ title: "Fully Proficient", value: "proficient" },
-								],
-							},
-						},
-					],
-				},
 			],
 		},
 		{

@@ -19,11 +19,19 @@ export default {
 								list: [
 									{ title: "Cultivation", value: "cultivation" },
 									{ title: "Dispensary", value: "dispensary" },
+									{ title: "Distribution", value: "distribution" },
+									{
+										title: "Cultivation / Dispensary",
+										value: "cultivationDispensary",
+									},
+									{
+										title: "Cultivation / Extraction",
+										value: "cultivationExtraction",
+									},
 									{
 										title: "Extraction / Infusion",
 										value: "extractionInfusion",
 									},
-									{ title: "Distribution", value: "distribution" },
 									{ title: "Mix", value: "mix" },
 								],
 							},
@@ -80,6 +88,7 @@ export default {
 									{ title: "Severe", value: "severe" },
 									{ title: "Significant", value: "significant" },
 									{ title: "Moderate", value: "moderate" },
+									{ title: "Negligible", value: "negligible" },
 									{ title: "Minor", value: "minor" },
 								],
 							},
@@ -90,6 +99,7 @@ export default {
 							type: "string",
 							options: {
 								list: [
+									{ title: "Enterprise-Wide", value: "enterpriseWide" },
 									{ title: "Baseline Critical", value: "baseline" },
 									{ title: "Significant", value: "significant" },
 									{ title: "Advanced", value: "advanced" },
@@ -117,18 +127,46 @@ export default {
 									type: "object",
 									fields: [
 										{
+											name: "createdAt",
+											title: "Created At",
+											type: "datetime",
+											readOnly: true,
+											hidden: true,
+											initialValue: () => new Date(),
+										},
+										{
+											name: "crppID",
+											title: "CRPP ID",
+											type: "string",
+										},
+										{
+											name: "score",
+											title: "Score",
+											type: "number",
+											validation: (Rule) => [
+												Rule.min(0)
+													.max(100)
+													.error("Score must be between 0 and 100"),
+											],
+										},
+
+										{
 											name: "prime",
 											title: "Proficiency Scoring",
-											type: "number",
+											type: "boolean",
+											initialValue: false,
 										},
 									],
+									preview: {
+										select: {
+											title: "_createdAt",
+											subtitle: "score",
+										},
+									},
 								},
 							],
 						},
 					],
-					options: {
-						editModal: "fullscreen",
-					},
 				},
 			],
 		},
@@ -204,14 +242,19 @@ export default {
 		{
 			name: "riskManger",
 			title: "Risk Manager",
-			type: "reference",
-			to: [{ type: "user" }],
-			options: {
-				filter: "role == $role",
-				filterParams: {
-					role: "riskManager",
+			type: "array",
+			of: [
+				{
+					type: "reference",
+					to: [{ type: "user" }],
+					options: {
+						filter: "role == $role",
+						filterParams: {
+							role: "riskManager",
+						},
+					},
 				},
-			},
+			],
 		},
 		{
 			name: "client",
