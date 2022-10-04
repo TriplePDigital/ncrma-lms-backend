@@ -18,19 +18,32 @@ export default () =>
 								.title("Courses")
 								.child(S.documentTypeList("mission").title("Courses")),
 							S.listItem()
+								.title("Course Chapters")
+								.child(
+									S.documentTypeList("mission")
+										.title("Courses")
+										.child((stageID) =>
+											S.documentTypeList("stage")
+												.title("Chapters")
+												.defaultOrdering([{ field: "order", direction: "asc" }])
+												.filter('_type == "stage" && references($stageID)')
+												.params({ stageID })
+										)
+								),
+							S.listItem()
 								.title("Course Contents")
 								.child(
 									S.documentTypeList("mission")
 										.title("Courses")
 										.child((stageID) =>
 											S.documentTypeList("stage")
-												.title("Stages")
+												.title("Chapters")
 												.defaultOrdering([{ field: "order", direction: "asc" }])
 												.filter('_type == "stage" && references($stageID)')
 												.params({ stageID })
 												.child((checkpointID) =>
 													S.documentTypeList("checkpoint")
-														.title("Videos")
+														.title("Videos and Quizzes")
 														.filter(
 															'_type == "checkpoint" && references($checkpointID)'
 														)
@@ -40,19 +53,6 @@ export default () =>
 															{ field: "_createdAt", direction: "desc" },
 														])
 												)
-										)
-								),
-							S.listItem()
-								.title("Course Chapters")
-								.child(
-									S.documentTypeList("mission")
-										.title("Courses")
-										.child((stageID) =>
-											S.documentTypeList("stage")
-												.title("Stages")
-												.defaultOrdering([{ field: "order", direction: "asc" }])
-												.filter('_type == "stage" && references($stageID)')
-												.params({ stageID })
 										)
 								),
 						])
@@ -97,8 +97,36 @@ export default () =>
 						])
 				),
 			S.listItem()
-				.title("Students")
-				.child(S.documentTypeList("user").title("Students")),
+				.title("Accounts")
+				.child(
+					S.list()
+						.title("Account Groups")
+						.items([
+							S.listItem()
+								.title("Risk Managers")
+								.child(
+									S.documentTypeList("user")
+										.title("Risk Managers")
+										.filter('_type == "user" && role == "riskManager"')
+								),
+							S.listItem()
+								.title("Students")
+								.child(
+									S.documentTypeList("user")
+										.title("Students")
+										.filter(
+											'_type == "user" && role == "student" || role == null'
+										)
+								),
+							// S.listItem()
+							// 	.title("Administrators")
+							// 	.child(
+							// 		S.documentTypeList("user")
+							// 			.title("Administrators")
+							// 			.filter('_type == "user" && role == "admin"')
+							// 	),
+						])
+				),
 			S.listItem()
 				.title("Enrollments by User")
 				.child(
@@ -111,24 +139,6 @@ export default () =>
 								.params({ userID })
 						)
 				),
-			S.listItem()
-				.title("Quizzes by Course")
-				.child(
-					S.documentTypeList("mission")
-						.title("Courses")
-						.child((missionId) =>
-							S.documentTypeList("quiz")
-								.title("Quiz")
-								.filter('_type == "quiz" && references($missionId)')
-								.params({ missionId })
-						)
-					// .child(
-					// 	(quizID) =>
-					// 		S.documentTypeList("question").title("Questions by Quiz")
-					// 	// .filter('_type == "quiz" && _id == $quizID')
-					// 	// .params({ quizID })
-					// )
-				),
 			S.divider(),
 			S.listItem()
 				.title("Bulk Action Questions")
@@ -136,9 +146,6 @@ export default () =>
 			S.listItem()
 				.title("Bulk Action Quizzes")
 				.child(createSuperPane("quiz", S)),
-			S.listItem()
-				.title("Bulk Action Quiz Attempts")
-				.child(createSuperPane("quizAttempt", S)),
 			S.divider(),
 			...S.documentTypeListItems().filter((item) => {
 				const { name } = item.getSchemaType();
@@ -147,8 +154,6 @@ export default () =>
 					name === "quizAttempt" ||
 					name === "progress" ||
 					name === "webinar" ||
-					name === "quiz" ||
-					name === "question" ||
 					name === "enrollment" ||
 					name === "riskManagerProfile" ||
 					name === "facility" ||
