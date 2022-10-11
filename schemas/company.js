@@ -186,8 +186,13 @@ export default {
 			type: "object",
 			fields: [
 				{
-					name: "streetAddress",
-					title: "Street Address",
+					name: "streetAddress1",
+					title: "Street Address 1",
+					type: "string",
+				},
+				{
+					name: "streetAddress2",
+					title: "Street Address 2",
 					type: "string",
 				},
 				{
@@ -203,6 +208,11 @@ export default {
 				{
 					name: "zip",
 					title: "Zip Code",
+					type: "string",
+				},
+				{
+					name: "phoneNumber",
+					title: "Phone Number",
 					type: "string",
 				},
 			],
@@ -228,7 +238,7 @@ export default {
 					type: "string",
 				},
 				{
-					name: "phone",
+					name: "phoneNumber",
 					title: "Phone",
 					type: "string",
 				},
@@ -240,7 +250,7 @@ export default {
 			],
 		},
 		{
-			name: "riskManger",
+			name: "riskManager",
 			title: "Risk Manager",
 			type: "array",
 			of: [
