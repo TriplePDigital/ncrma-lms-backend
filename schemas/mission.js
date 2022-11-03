@@ -1,3 +1,25 @@
+import client from "part:@sanity/base/client";
+
+const isUniqueSKU = (sku, context) => {
+	const { document } = context;
+
+	const id = document._id.replace(/^drafts\./, "");
+
+	const params = {
+		draft: `drafts.${id}`,
+		published: id,
+		sku,
+	};
+
+	const query = `!defined(*[
+    _type == 'mission' &&
+    !(_id in [$draft, $published]) &&
+    sku == $sku
+  ][0]._id)`;
+
+	return client.fetch(query, params);
+};
+
 export default {
 	name: "mission",
 	title: "Mission",
@@ -81,6 +103,17 @@ export default {
 			options: {
 				layout: "tags",
 			},
+		},
+		{
+			title: "SKU",
+			name: "sku",
+			type: "string",
+			validation: (Rule) =>
+				Rule.custom(async (value, context) => {
+					const isUnique = await isUniqueSKU(value, context);
+					if (!isUnique) return "SKU is not unique";
+					return true;
+				}),
 		},
 	],
 };
