@@ -157,7 +157,8 @@ export default () =>
 					name === "enrollment" ||
 					name === "riskManagerProfile" ||
 					name === "facility" ||
-					name === "company"
+					name === "company" ||
+					name === "marketing"
 				);
 			}),
 		])
