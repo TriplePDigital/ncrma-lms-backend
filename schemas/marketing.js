@@ -4,9 +4,39 @@ export default {
 	type: "document",
 	fields: [
 		{
-			name: "campaign",
-			title: "Campaign",
+			name: "name",
+			title: "Campaign Name",
 			type: "string",
+		},
+		{
+			name: "slug",
+			title: "Slug",
+			description:
+				"This is the URL for the campaign that will be used in marketing emails and promo links.",
+			type: "slug",
+			options: {
+				source: "name",
+			},
+		},
+		{
+			name: "content",
+			title: "Content",
+			type: "markdown",
+		},
+		{
+			name: "image",
+			title: "Image",
+			type: "image",
+		},
+		{
+			name: "price",
+			title: "Price",
+			type: "number",
+		},
+		{
+			name: "expires",
+			title: "Expires",
+			type: "date",
 		},
 		{
 			name: "list",
@@ -52,8 +82,16 @@ export default {
 	],
 	preview: {
 		select: {
-			title: "campaign",
+			title: "name",
+			subtitle: "expires",
 			media: "image",
+		},
+		prepare(selection) {
+			return {
+				title: selection.title,
+				subtitle: `Expires: ${selection.subtitle}`,
+				media: selection.media,
+			};
 		},
 	},
 };

@@ -5,6 +5,10 @@ const isUniqueSKU = (sku, context) => {
 
 	const id = document._id.replace(/^drafts\./, "");
 
+	if (!sku) {
+		return true;
+	}
+
 	const params = {
 		draft: `drafts.${id}`,
 		published: id,
@@ -94,6 +98,12 @@ export default {
 			hidden: ({ currentUser }) => {
 				return !currentUser.roles.find(({ name }) => name === "administrator");
 			},
+		},
+		{
+			name: "activePromo",
+			title: "Active Promo",
+			type: "reference",
+			to: { type: "marketing" },
 		},
 		{
 			title: "Categories",
