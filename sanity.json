@@ -15,7 +15,9 @@
     "markdown",
     "goth-vimeo-input",
     "@sanity/dashboard",
-    "@sanity/vision"
+    "@sanity/vision",
+    "@indent-oss/sanityio-referenced-by",
+    "groq-list"
   ],
   "env": {
     "development": {

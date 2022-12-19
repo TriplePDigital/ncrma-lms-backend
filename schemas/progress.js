@@ -26,11 +26,15 @@ export default {
 			firstName: "enrollment.student.firstName",
 			lastName: "enrollment.student.lastName",
 			sub: "content.title",
+			stage: "content.stage.title",
+			course: "content.stage.mission.title",
+			avatar: "enrollment.student.avatar",
 		},
 		prepare(selection) {
 			return {
 				title: `${selection.firstName} ${selection.lastName}`,
-				subtitle: selection.sub,
+				subtitle: `${selection.sub} | ${selection.stage} | ${selection.course}`,
+				media: selection.avatar,
 			};
 		},
 	},
