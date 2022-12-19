@@ -128,6 +128,12 @@ export default {
 			},
 		},
 		{
+			name: "membershipType",
+			title: "Membership Type",
+			type: "reference",
+			to: { type: "membership" },
+		},
+		{
 			name: "achievements",
 			title: "Completed Certificates",
 			type: "array",

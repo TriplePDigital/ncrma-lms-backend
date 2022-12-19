@@ -23,6 +23,7 @@ import enrollment from "./enrollment";
 import riskManagerProfile from "./riskManagerProfile";
 import company from "./company";
 import marketing from "./marketing";
+import membership from "./membership";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -46,5 +47,6 @@ export default createSchema({
 		riskManagerProfile,
 		company,
 		marketing,
+		membership,
 	]),
 });
