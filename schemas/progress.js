@@ -23,8 +23,15 @@ export default {
 	],
 	preview: {
 		select: {
-			title: "enrollment.student.firstName",
-			subtitle: "content.title",
+			firstName: "enrollment.student.firstName",
+			lastName: "enrollment.student.lastName",
+			sub: "content.title",
+		},
+		prepare(selection) {
+			return {
+				title: `${selection.firstName} ${selection.lastName}`,
+				subtitle: selection.sub,
+			};
 		},
 	},
 };
