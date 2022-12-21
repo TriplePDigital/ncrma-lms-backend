@@ -43,8 +43,4 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Deploy to Sanity
-        uses: sanity-io/deploy-action@v1
-        with:
-          project_id: "tfh7h5l0"
-          dataset: "production"
-          token: ${{ secrets.SANITY_TOKEN }}
+        run: export SANITY_AUTH_TOKEN="${{ secrets.SANITY_TOKEN }}" && yarn deploy
