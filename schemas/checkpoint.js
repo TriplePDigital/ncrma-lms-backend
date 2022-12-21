@@ -60,4 +60,17 @@ export default {
 			by: [{ field: "order", direction: "asc", default: true }],
 		},
 	],
+	preview: {
+		select: {
+			title: "title",
+			stageTitle: "stage.title",
+			courseTitle: "stage.mission.title",
+		},
+		prepare({ title, stageTitle, courseTitle }) {
+			return {
+				title,
+				subtitle: `${stageTitle} | ${courseTitle}`,
+			};
+		},
+	},
 };
