@@ -1,11 +1,8 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build, test, and deploy app to Azure Web App - EMSE-API
+name: Deploy to Sanity Studio
 
 on:
   push:
-    branches: [master, dev]
+    branches: [master]
 
 jobs:
   build:
@@ -46,9 +43,8 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Deploy to Sanity
-        uses: sanity-io/deploy-action@v1
+        uses: sanity-io/github-action-sanity@v0.2-alpha
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
         with:
-          project_id: "tfh7h5l0"
-          dataset: "production"
-          token: ${{ secrets.SANITY_TOKEN }}
-          target: ${{ secrets.SANITY_TARGET }}
+          args: deploy

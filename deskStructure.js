@@ -147,6 +147,42 @@ export default () =>
 								.params({ userID })
 						)
 				),
+			S.listItem()
+				.title("Progress by User and Enrollment")
+				.child(
+					S.documentTypeList("user")
+						.title("Users")
+						.child((userID) =>
+							S.documentTypeList("enrollment")
+								.title("Enrollments for User")
+								.filter('_type == "enrollment" && references($userID)')
+								.params({ userID })
+								.child((enrollmentID) =>
+									S.documentTypeList("progress")
+										.title("Progress for Enrollment")
+										.filter('_type == "progress" && references($enrollmentID)')
+										.params({ enrollmentID })
+										.initialValueTemplates([
+											S.initialValueTemplateItem("progress-by-enrollment", {
+												enrollmentID,
+												userID,
+											}),
+										])
+								)
+						)
+				),
+			S.listItem()
+				.title("Quiz Attempts by User")
+				.child(
+					S.documentTypeList("user")
+						.title("Users")
+						.child((userID) =>
+							S.documentTypeList("quizAttempt")
+								.title("Quiz Attempts for User")
+								.filter('_type == "quizAttempt" && references($userID)')
+								.params({ userID })
+						)
+				),
 			S.divider(),
 			S.listItem()
 				.title("Bulk Action Questions")
