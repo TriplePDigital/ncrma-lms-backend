@@ -2,7 +2,7 @@ name: Deploy to Sanity Studio
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
