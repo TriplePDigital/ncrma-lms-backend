@@ -19,7 +19,7 @@ export default {
 			name: "status",
 			title: "Status",
 			type: "number",
-			validations: (Rule) => Rule.min(0).max(100),
+			validation: (Rule) => Rule.min(0).max(100),
 		},
 	],
 	preview: {
