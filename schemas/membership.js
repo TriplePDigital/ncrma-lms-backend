@@ -35,18 +35,6 @@ export default {
 			title: "Membership Name",
 		},
 		{
-			name: "type",
-			title: "Membership Type",
-			type: "string",
-			options: {
-				list: [
-					{ title: "Individual", value: "individual" },
-					{ title: "Company", value: "company" },
-				],
-				layout: "dropdown",
-			},
-		},
-		{
 			title: "SKU",
 			name: "sku",
 			type: "string",
@@ -55,7 +43,7 @@ export default {
 					const isUnique = await isUniqueSKU(value, context);
 					if (!isUnique) return "SKU is not unique";
 					return true;
-				}).max(3),
+				}),
 		},
 		{
 			type: "number",
