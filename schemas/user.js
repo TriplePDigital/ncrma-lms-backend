@@ -104,6 +104,13 @@ export default {
 			initialValue: false,
 		},
 		{
+			name: "discountUsage",
+			title: "Discounts remaining",
+			description: "How many discounted course track purchases are left.",
+			type: "number",
+			initialValue: 0,
+		},
+		{
 			// this is only if you use credentials provider
 			// TODO: implement email password authentication
 			name: "password",
