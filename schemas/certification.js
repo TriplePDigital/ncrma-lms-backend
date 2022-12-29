@@ -26,15 +26,12 @@ export default {
 			},
 		},
 		{
-			name: "track",
-			title: "Track & Mission(s)",
+			name: "missions",
+			title: "Mission(s) included",
 			description:
-				"Select the track and/or missions that are required for the completion of this certification.",
+				"Select the missions that are required for the completion of this certification.",
 			type: "array",
-			of: [
-				{ name: "track", type: "reference", to: { type: "track" } },
-				{ name: "mission", type: "reference", to: { type: "mission" } },
-			],
+			of: [{ name: "mission", type: "reference", to: { type: "mission" } }],
 		},
 	],
 };
