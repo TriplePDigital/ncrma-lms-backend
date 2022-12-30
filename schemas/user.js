@@ -1,28 +1,4 @@
-import client from "part:@sanity/base/client";
-
-const isUniqueUser = async (email, context) => {
-	const { document } = context;
-
-	const id = document._id.replace(/^drafts\./, "");
-	const params = {
-		email,
-		published: id,
-		draft: `drafts.${id}`,
-	};
-
-	/* groq */
-	const query = `!defined(*[
-    	_type == 'user' &&
-		!(_id in [$draft, $published]) &&
-    	email == $email
-  	][0])`;
-
-	const res = await client.fetch(query, params);
-
-	console.log(res);
-
-	return res;
-};
+import { isUnique } from "../util/isUnique";
 
 export default {
 	name: "user",
@@ -70,8 +46,8 @@ export default {
 			required: true,
 			validation: (Rule) =>
 				Rule.custom(async (value, context) => {
-					const isUnique = await isUniqueUser(value, context);
-					if (!isUnique) return "User needs a unique email address";
+					const found = await isUnique(value, context, "user", "email");
+					if (!found) return "User needs a unique email address";
 					return true;
 				}),
 		},
