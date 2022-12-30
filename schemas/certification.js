@@ -1,3 +1,5 @@
+import { isUnique } from "../util/isUnique";
+
 export default {
 	name: "certification",
 	title: "Certification",
@@ -32,6 +34,23 @@ export default {
 				"Select the missions that are required for the completion of this certification.",
 			type: "array",
 			of: [{ name: "mission", type: "reference", to: { type: "mission" } }],
+		},
+		{
+			name: "sku",
+			title: "SKU",
+			type: "string",
+			validation: (Rule) =>
+				Rule.custom(async (value, context) => {
+					const found = await isUnique(value, context, "certification", "sku");
+					if (!found) return "SKU is not unique";
+					return true;
+				}),
+		},
+		{
+			name: "price",
+			title: "Price",
+			type: "number",
+			validation: (Rule) => Rule.required().min(0),
 		},
 	],
 };
