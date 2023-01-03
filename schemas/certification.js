@@ -53,4 +53,16 @@ export default {
 			validation: (Rule) => Rule.required().min(0),
 		},
 	],
+	preview: {
+		select: {
+			title: "title",
+			sub: "sku",
+		},
+		prepare({ title, sub }) {
+			return {
+				title,
+				subtitle: sub,
+			};
+		},
+	},
 };
