@@ -117,6 +117,14 @@ export default {
 			to: { type: "membership" },
 		},
 		{
+			name: "membershipID",
+			title: "Membership ID",
+			type: "string",
+			readOnly: ({ currentUser }) => {
+				return !currentUser.roles.find(({ name }) => name === "administrator");
+			},
+		},
+		{
 			name: "achievements",
 			title: "Completed Certificates",
 			type: "array",
