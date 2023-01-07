@@ -1,28 +1,4 @@
-import client from "part:@sanity/base/client";
-
-const isUniqueSKU = (sku, context) => {
-	const { document } = context;
-
-	const id = document._id.replace(/^drafts\./, "");
-
-	if (!sku) {
-		return true;
-	}
-
-	const params = {
-		draft: `drafts.${id}`,
-		published: id,
-		sku,
-	};
-
-	const query = `!defined(*[
-    _type == 'membership' &&
-    !(_id in [$draft, $published]) &&
-    sku == $sku
-  ][0]._id)`;
-
-	return client.fetch(query, params);
-};
+import { isUnique } from "../util/isUnique";
 
 export default {
 	name: "membership",
@@ -40,8 +16,8 @@ export default {
 			type: "string",
 			validation: (Rule) =>
 				Rule.custom(async (value, context) => {
-					const isUnique = await isUniqueSKU(value, context);
-					if (!isUnique) return "SKU is not unique";
+					const found = await isUnique(value, context, "membership", "sku");
+					if (!found) return "SKU is not unique";
 					return true;
 				}),
 		},
