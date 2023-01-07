@@ -1,4 +1,4 @@
-import { client } from "sanity-plugin-mux-input/build/clients/SanityClient";
+import { client } from "part:@sanity/base/client";
 
 export const isUnique = (value, context, type, property) => {
 	const { document } = context;
