@@ -1,4 +1,4 @@
-import { client } from "part:@sanity/base/client";
+import client from "part:@sanity/base/client";
 
 export const isUnique = (value, context, type, property) => {
 	const { document } = context;

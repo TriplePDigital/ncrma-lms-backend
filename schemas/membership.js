@@ -65,5 +65,14 @@ export default {
 			title: "Discount Included",
 			validation: (Rule) => Rule.min(0).max(100),
 		},
+		{
+			type: "number",
+			name: "discountCount",
+			title: "Discount Count",
+			description:
+				"How many times can the discount on course bundle purchases be used?",
+			codegen: { required: true },
+			validation: (Rule) => Rule.min(0).required(),
+		},
 	],
 };

@@ -44,6 +44,7 @@ export default {
 			title: "Email",
 			type: "string",
 			required: true,
+			codegen: { required: true },
 			validation: (Rule) =>
 				Rule.custom(async (value, context) => {
 					const found = await isUnique(value, context, "user", "email");
@@ -71,6 +72,7 @@ export default {
 					_type: "reference",
 				},
 			},
+			codegen: { required: true },
 			validation: (Rule) => Rule.required(),
 		},
 		{
