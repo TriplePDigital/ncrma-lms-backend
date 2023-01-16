@@ -9,12 +9,14 @@ export default {
 			name: "title",
 			title: "Course Title",
 			type: "string",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required().min(2).max(70),
 		},
 		{
 			name: "slug",
 			title: "Slug",
 			type: "slug",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required(),
 			options: {
 				source: "title",
@@ -26,12 +28,14 @@ export default {
 			title: "Course Blurb",
 			description: "One liner about the course",
 			type: "text",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required().max(150),
 		},
 		{
 			name: "description",
 			title: "Description",
 			type: "markdown",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required(),
 			options: {
 				minRows: 15,
@@ -50,6 +54,7 @@ export default {
 			name: "instructors",
 			title: "Instructor(s)",
 			type: "array",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required(),
 			of: [
 				{
@@ -65,6 +70,7 @@ export default {
 				"The hexadecimal value of the color assigned to the course (including the # mark at the beginning).",
 			type: "string",
 			placeholder: "#000000",
+			codegen: { required: true },
 			validation: (Rule) => Rule.required().length(7),
 		},
 		{

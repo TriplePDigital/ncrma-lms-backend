@@ -9,3 +9,5 @@ dist/**/*
 *.tar.gz
 
 public/
+
+dist/

@@ -1,3 +1,5 @@
+import { isUnique } from "../util/isUnique";
+
 export default {
 	name: "track",
 	title: "Course Track",
@@ -9,10 +11,13 @@ export default {
 			type: "string",
 		},
 		{
-			name: "enrolled",
-			title: "Enrolled",
-			type: "array",
-			of: [{ name: "user", type: "reference", to: { type: "user" } }],
+			name: "slug",
+			title: "Slug",
+			type: "slug",
+			options: {
+				source: "name",
+				maxLength: 96,
+			},
 		},
 		{
 			name: "achievement",
@@ -27,6 +32,17 @@ export default {
 			title: "Missions",
 			type: "array",
 			of: [{ name: "mission", type: "reference", to: { type: "mission" } }],
+		},
+		{
+			name: "sku",
+			title: "SKU",
+			type: "string",
+			validation: (Rule) =>
+				Rule.custom(async (value, context) => {
+					const found = await isUnique(value, context, "track", "sku");
+					if (!found) return "SKU is not unique";
+					return true;
+				}),
 		},
 	],
 };

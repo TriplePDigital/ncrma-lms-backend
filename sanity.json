@@ -17,12 +17,14 @@
     "@sanity/dashboard",
     "@sanity/vision",
     "@indent-oss/sanityio-referenced-by",
-    "groq-list"
+    "groq-list",
+    "content-model-graph"
   ],
   "env": {
     "development": {
       "plugins": [
-        "@sanity/vision"
+        "@sanity/vision",
+        "media"
       ]
     }
   },
