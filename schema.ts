@@ -627,11 +627,11 @@ export interface Track extends SanityDocument {
 	name?: string;
 
 	/**
-	 * Enrolled — `array`
+	 * Slug — `slug`
 	 *
 	 *
 	 */
-	enrolled?: Array<SanityKeyedReference<User>>;
+	slug?: { _type: "slug"; current: string };
 
 	/**
 	 * Achievement — `reference`
@@ -646,6 +646,13 @@ export interface Track extends SanityDocument {
 	 *
 	 */
 	missions?: Array<SanityKeyedReference<Mission>>;
+
+	/**
+	 * SKU — `string`
+	 *
+	 *
+	 */
+	sku?: string;
 }
 
 /**
@@ -1610,6 +1617,29 @@ export interface Membership extends SanityDocument {
 	discountCount: number;
 }
 
+/**
+ * Notification
+ *
+ *
+ */
+export interface Notification extends SanityDocument {
+	_type: "notification";
+
+	/**
+	 * Cause — `string`
+	 *
+	 *
+	 */
+	cause?: "purchase";
+
+	/**
+	 * Recipient — `array`
+	 *
+	 *
+	 */
+	recipient?: Array<SanityKeyed<string>>;
+}
+
 export type Answer = {
 	_type: "answer";
 	/**
@@ -1645,7 +1675,8 @@ export type Documents =
 	| RiskManagerProfile
 	| Company
 	| Marketing
-	| Membership;
+	| Membership
+	| Notification;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
